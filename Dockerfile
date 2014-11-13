@@ -7,7 +7,6 @@ WORKDIR /srv/oauthenticator
 ENV OAUTHENTICATOR_DIR /srv/oauthenticator
 
 ADD oauthenticator.py /srv/oauthenticator/oauthenticator.py
-ADD addusers.sh /srv/oauthenticator/addusers.sh
 
 # Set up dockerspawner
 ADD dockerspawner.py /srv/oauthenticator/dockerspawner.py
@@ -18,4 +17,3 @@ RUN pip3 install docker-py
 ONBUILD ADD userlist /srv/oauthenticator/userlist
 ONBUILD ADD ssl /srv/oauthenticator/ssl
 ONBUILD RUN chmod 700 /srv/oauthenticator
-ONBUILD RUN ["sh", "/srv/oauthenticator/addusers.sh"]

@@ -27,7 +27,7 @@ with open(join(root, 'userlist')) as f:
         if not line:
             continue
         parts = line.split()
-        name = parts[0]
+        name = parts[0].split(":")[0]
         whitelist.add(name)
         if len(parts) > 1 and parts[1] == 'admin':
             admin.add(name)
