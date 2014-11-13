@@ -28,7 +28,11 @@ callback URL is:
 
     http[s]://[your-host]/hub/oauth_callback
 
-Add your oauth client id, client secret, and callback URL to the `env file`.
+Where `[your-host]` is where your server will be running. Such as
+`example.com:8000`.
+
+Then, add your oauth client id, client secret, and callback URL to the `env
+file`.
 
 ### SSL
 
@@ -37,7 +41,8 @@ ssl/ssl.cert.
 
 ## Building the container
 
-You need to build both the singleuser server container, and this example container:
+You need to build both the singleuser server container, and this example
+container:
 
     docker build -t jupyter/singleuser ../dockerspawner/singleuser
     docker build -t jhamrick/oauthenticator-custom .
