@@ -8,5 +8,5 @@ for line in `cat userlist`; do
   user=`echo $userid | cut -f 1 -d':'`
   id=`echo $userid | cut -f 2 -d':'`
   echo "adding user $user ($id)"
-  useradd -u $id -m -s /bin/bash $user
+  useradd -u $id -s /bin/bash $user
 done
