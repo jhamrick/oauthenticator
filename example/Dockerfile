@@ -1,1 +1,1 @@
-FROM jhamrick/oauthentication
+FROM jhamrick/oauthenticator
