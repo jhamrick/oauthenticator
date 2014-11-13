@@ -69,7 +69,7 @@ class DockerSpawner(Spawner):
         Returns a list of all the values in self.volumes or
         self.read_only_volumes.
         """
-        return ["/home/{}".format(self.user.name), list(
+        return ["/home/{}".format(self.user.name)] + list(
             itertools.chain(
                 self.volumes.values(),
                 self.read_only_volumes.values(),
