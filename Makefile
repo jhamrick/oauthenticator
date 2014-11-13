@@ -4,7 +4,7 @@ all:
 	git pull
 	git submodule update
 	docker build -t jupyter/singleuser dockerspawner/singleuser
-	docker built -t jhamrick/oauthenticator-custom example
+	docker build -t jhamrick/oauthenticator-custom example
 
 init:
 	git submodule init
