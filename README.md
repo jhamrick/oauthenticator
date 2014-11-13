@@ -1,9 +1,9 @@
-# OAuthenticator
+# OAuthenticator + DockerSpawner
 
-GitHub OAuth + JuptyerHub Authenticator = OAuthenticator
-
-Example of running [JupyterHub](https://github.com/jupyter/jupyterhub)
-with [GitHub OAuth](https://developer.github.com/v3/oauth/) for authentication.
+Example of running [JupyterHub](https://github.com/jupyter/jupyterhub) with
+[GitHub OAuth](https://developer.github.com/v3/oauth/) for authentication as
+well as [DockerSpawner](https://github.com/jupyter/dockerspawner) to launch
+notebook servers in individual docker containers.
 
 ## setup
 
@@ -35,7 +35,7 @@ Where `[your-host]` is where your server will be running. Such as `example.com:8
 
 Build the container with:
 
-    docker build -t jupyter/oauthenticator .
+    make
 
 ### ssl
 
@@ -46,14 +46,8 @@ To run the server on HTTPS, put your ssl key and cert in ssl/ssl.key and ssl/ssl
 Add your oauth client id, client secret, and callback URL to the `env file`.
 Once you have built the container, you can run it with:
 
-    docker run -it -p 9000:8000 --env-file=env jupyter/oauthenticator
+    make run
 
 Which will run the Jupyter server.
-
-
-# User servers in docker containers
-
-There is [another example](https://github.com/jupyter/dockerspawner/tree/master/examples/oauth)
-for using GitHub OAuth to spawn each user's server in a separate docker container.
 
   
