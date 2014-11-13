@@ -185,10 +185,10 @@ class DockerSpawner(Spawner):
         """start the single-user server in a docker container"""
         container = yield self.get_container()
         if container is None:
-            image = image or self.container_image
+            image = "{}:{}".format(image or self.container_image, self.user.name)
             resp = yield self.docker(
                 'create_container',
-                image=image or self.container_image,
+                image=image,
                 environment=self.env,
                 volumes=self.volume_mount_points,
                 user=self.user.name,
