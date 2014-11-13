@@ -4,8 +4,11 @@ c = get_config()
 
 c.JupyterHubApp.log_level = 10
 c.JupyterHubApp.authenticator_class = 'oauthenticator.LocalGitHubOAuthenticator'
+c.JupyterHubApp.spawner_class = 'dockerspawner.DockerSpawner
 
-c.LocalGitHubOAuthenticator.create_system_users = True
+# The docker instances need access to the Hub, so the default loopback port doesn't work:
+from IPython.utils.localinterfaces import public_ips
+c.JupyterHubApp.hub_ip = public_ips()[0]
 
 c.Authenticator.whitelist = whitelist = set()
 c.JupyterHubApp.admin_users = admin = set()
