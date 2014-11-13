@@ -96,8 +96,7 @@ class DockerSpawner(Spawner):
             for key, value in self.read_only_volumes.items()
         }
         volumes.update(ro_volumes)
-        volumes["/home/jupyter"] = "/home/{}".format(self.user.name)
-        self.log.info("Volumes: {}".format(volumes))
+        volumes["/home/{}".format(self.user.name)] = {'bind': "/home/jupyter", 'ro': False}
         return volumes
 
     def load_state(self, state):
