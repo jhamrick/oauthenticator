@@ -11,4 +11,4 @@ init:
 	git submodule init
 
 run: all
-	docker run --net=host -it -p 8000:8000 --env-file=example/env jhamrick/oauthenticator-custom
+	docker run --net=host -it -p 8000:8000 -v /var/run/docker.sock:/docker.sock --env-file=example/env jhamrick/oauthenticator-custom
