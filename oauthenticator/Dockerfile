@@ -10,7 +10,7 @@ ADD oauthenticator.py /srv/oauthenticator/oauthenticator.py
 ADD addusers.sh /srv/oauthenticator/addusers.sh
 
 # Set up dockerspawner
-ADD dockerspawner/dockerspawner.py /srv/oauthenticator/dockerspawner.py
+ADD ../dockerspawner/dockerspawner.py /srv/oauthenticator/dockerspawner.py
 ENV DOCKER_HOST unix://docker.sock
 VOLUME /var/run/docker.sock:/docker.sock
 RUN pip3 install docker-py
