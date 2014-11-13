@@ -2,6 +2,10 @@
 
 ## Setup
 
+Create a `jupyter` user with id 3000:
+
+    sudo useradd -u 3000 jupyter
+
 ### Users
 
 Make a file called `userlist` with one GitHub user name per line.
@@ -19,6 +23,9 @@ jayne
 simon
 river
 ```
+
+These users should also each have a home directory that is readable and
+writeable by the `jupyter` user.
 
 ### OAuth
 

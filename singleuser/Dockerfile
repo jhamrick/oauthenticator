@@ -9,7 +9,8 @@ MAINTAINER IPython Project <ipython-dev@scipy.org>
 ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
 RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
 
-# jupyter is our user
+# jupyter is our user -- we assume that there is also a user called "jupyter" on
+# the host system, with an id of 3000
 RUN useradd -u 3000 -m -s /bin/bash jupyter
 
 USER jupyter
