@@ -69,7 +69,7 @@ class DockerSpawner(Spawner):
         Returns a list of all the values in self.volumes or
         self.read_only_volumes.
         """
-        return ["/home/{}".format(self.user.name)] + list(
+        return ["/home/jupyter"] + list(
             itertools.chain(
                 self.volumes.values(),
                 self.read_only_volumes.values(),
@@ -96,7 +96,7 @@ class DockerSpawner(Spawner):
             for key, value in self.read_only_volumes.items()
         }
         volumes.update(ro_volumes)
-        volumes["/home/{}".format(self.user.name)] = "/home/{}".format(self.user.name)
+        volumes["/home/jupyter"] = "/home/{}".format(self.user.name)
         return volumes
 
     def load_state(self, state):
@@ -120,10 +120,7 @@ class DockerSpawner(Spawner):
             JPY_COOKIE_NAME=self.user.server.cookie_name,
             JPY_BASE_URL=self.user.server.base_url,
             JPY_HUB_PREFIX=self.hub.server.base_url,
-            JPY_HUB_API_URL=self.hub.api_url,
-            HOME="/home/{}".format(self.user.name),
-            SHELL="/bin/bash",
-            USER=self.user.name
+            JPY_HUB_API_URL=self.hub.api_url
         ))
         return env
 
@@ -187,9 +184,7 @@ class DockerSpawner(Spawner):
                 'create_container',
                 image=image or self.container_image,
                 environment=self.env,
-                volumes=self.volume_mount_points,
-                user=self.user.name,
-                working_dir="/home/{}".format(self.user.name)
+                volumes=self.volume_mount_points
             )
             self.container_id = resp['Id']
             self.log.info("Created container %s (%s)", self.container_id[:7], image)
