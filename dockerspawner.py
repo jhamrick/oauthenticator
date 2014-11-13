@@ -97,6 +97,7 @@ class DockerSpawner(Spawner):
         }
         volumes.update(ro_volumes)
         volumes["/home/jupyter"] = "/home/{}".format(self.user.name)
+        self.log.info("Volumes: {}".format(volumes))
         return volumes
 
     def load_state(self, state):
