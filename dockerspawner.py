@@ -169,14 +169,13 @@ class DockerSpawner(Spawner):
 
     @gen.coroutine
     def get_container(self):
-        if not self.container_id:
-            return
-        self.log.debug("Getting container %s", self.container_id[:7])
+        self.log.debug("Getting container for user '%s'", self.user.name)
         containers = yield self.docker('containers', all=True)
         for c in containers:
-            if c['Id'] == self.container_id:
+            if "/{}".format(self.user.name) in c['Names']:
+                self.container_id = c['Id']
                 raise gen.Return(c)
-        self.log.info("Container %s is gone", self.container_id[:7])
+        self.log.info("Container for user '%s' is gone", self.user.name)
         # my container is gone, forget my id
         self.container_id = ''
     
@@ -192,7 +191,8 @@ class DockerSpawner(Spawner):
                 environment=self.env,
                 volumes=self.volume_mount_points,
                 user=self.user.name,
-                working_dir="/home/{}".format(self.user.name)
+                working_dir="/home/{}".format(self.user.name),
+                name=self.user.name
             )
             self.container_id = resp['Id']
             self.log.info(
@@ -220,4 +220,6 @@ class DockerSpawner(Spawner):
         """
         self.log.info("Stopping container %s", self.container_id[:7])
         yield self.docker('stop', self.container_id)
+        self.log.info("Removing container %s", self.container_id[:7])
+        yield self.docker('remove_container', self.container_id)
         self.clear_state()
